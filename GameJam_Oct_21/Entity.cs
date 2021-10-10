@@ -77,15 +77,12 @@ namespace GameJam_Oct_21
         public float Healing(float healthGain)
         {
 
-            if ((_health + healthGain) >= HealthCap)
+            if ((_health >= HealthCap))
             {
-                _health += (healthGain - HealthCap);
-                return (healthGain - HealthCap);
-            }
-            else
-                _health += healthGain;
 
-            return healthGain;
+            } 
+
+            return 0;
         }
     }
 }

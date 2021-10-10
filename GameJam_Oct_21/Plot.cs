@@ -116,7 +116,6 @@ namespace GameJam_Oct_21
             Console.WriteLine("Moments later a inner light was showing within the lowly assassin. Once the blinding light cleared all you saw was a fish. . . *Gloop!? \n" +
             "Close to the brink of suffocating the assassin now a fish found themselves a drain and fell to the sewer where he lived the rest of his life as a fish.");
             Console.Write(". . .");
-            //Console.Clear();
 
             Console.WriteLine("That's what you though But The Game Has Just Started! ");
             _draw = @"      
@@ -209,6 +208,9 @@ namespace GameJam_Oct_21
                         Console.ReadKey();
                         _currentScene = Scene.GAMEOVER;
                     }
+                    break;
+                case 1:
+                    _currentScene = Scene.GAMEOVER;
                     break;
 
 
@@ -303,7 +305,13 @@ namespace GameJam_Oct_21
                     break;
                 case 3:
                     if (_player.HealingPotion > 0)
-                        _player.Healing(75);
+                        if (_player.Healing(75) > 0)
+                        {
+                            _player.HealingPotion--;
+                            Console.WriteLine("You Healed For " + 75 + "health");
+                        }
+                        else
+                            Console.WriteLine("You're at full health");
                     break;
 
                 case 4:
@@ -325,6 +333,7 @@ namespace GameJam_Oct_21
             {
                 Console.WriteLine(_currentMinion.Name + " has died");
                 Console.ReadKey();
+                _currentMinion.Alive = true;
                 _player.HealingPotion++;
                 _minionTallie++;
                 Console.WriteLine("You'll now fight: " + _currentMinion.Name);
@@ -370,6 +379,8 @@ namespace GameJam_Oct_21
                 _currentScene = Scene.TRYAGINMENU;
             }
 
+            if (!_player.EarnPotion(_currentMinion))
+                Console.WriteLine("You Eanred a postion");
 
         }
 
@@ -459,8 +470,14 @@ namespace GameJam_Oct_21
                     }
                     break;
                 case 3:
-                    if (_player.HealingPotion > 0)
-                        _player.Healing(75);
+                    if (_player.HealingPotion >= 0)
+                        if (_player.Healing(75) > _player.HealthCap - _player.Health)
+                        {
+                            _player.HealingPotion--;
+                            Console.WriteLine("You Healed For " + 75 + "health");
+                        }
+                        else
+                            Console.WriteLine("You're at full health");
                     break;
 
                 case 4:
@@ -518,8 +535,13 @@ namespace GameJam_Oct_21
                 Console.WriteLine("Congrats, You have cleared the first floor");
                 Console.ReadLine();
                 Console.WriteLine("Until Next Update, You Have Reached the End of " + _player.Name + " The Fishiest Assasin");
+                _currentMiniBoss.Alive = true;
                 _currentScene = Scene.TRYAGINMENU;
             }
+
+            if(_player.EarnPotion(_currentMiniBoss))
+                Console.WriteLine("You Eanred a postion");
+
         }
         private void InitializePlayerAbilies()
         {
@@ -568,7 +590,7 @@ namespace GameJam_Oct_21
 
             for (int i = 0; i < names.Length; i++)
                 options[i] = names[i];
-            options[names.Length] = "Healing Scalap";
+            options[names.Length] = "("+_player.HealingPotion + ") Healing Scalap in stash";
             options[names.Length + 1] = "Quit";
             return options;
         }

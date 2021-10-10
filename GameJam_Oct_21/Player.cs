@@ -15,10 +15,15 @@ namespace GameJam_Oct_21
             _healingPotion = healingPotion;
         }
 
-        public void EarnPotion(Entity entity)
+        public bool EarnPotion(Entity entity)
         {
-            if (!entity.Alive)
+            bool response = true;
+            if (entity.Alive)
+            {
                 _healingPotion++;
+                response = false;
+            }
+            return response;
         } 
 
         
