@@ -4,91 +4,86 @@ using System.Text;
 
 namespace GameJam_Oct_21
 {
-    
     class Engine
     {
-        enum Scene
-        {
-            STARTMENU,
-            MAINMENU,
-            BATTLE,
-            FINALBOSS,
-            TRYAGINMENU,
-            GAMEOVER
+        private static bool _applicationShouldExit;
+        // Checks if the game has ended yet 
+        private bool gameOver = false;
+        // Creats an instance of a board 
+        private Plot _gameBoard;
 
-        }
-        Entity _player;
-        Abilitie[] _playerAbilities;
-
-        Entity _currentMinion;
-        Entity[] _minions;
-
-        Entity _boss;
-
-        bool gameOver = false;
+        /// <summary>
+        /// Runs the Starts, Draw, Updatw and End Functions 
+        /// </summary>
         public void Run()
         {
             Start();
 
             while (!gameOver)
             {
+                
                 Draw();
                 Update();
+                Console.Clear();
             }
+
             End();
         }
 
+        /// <summary>
+        /// Initilazes The Board
+        /// </summary>
         private void Start()
         {
-            InitializePlayerAbilies();
+            _gameBoard = new Plot();
+            _gameBoard.Start();
         }
 
         private void Draw()
         {
+            Console.Clear();
+            _gameBoard.Draw();
 
         }
 
         private void Update()
         {
-
+            _gameBoard.Update();
         }
 
         private void End()
         {
-
+            _gameBoard.End();
         }
 
-        private void SceneTransitions()
+        public static int GetInput(string description, params string[] options)
         {
+            int choice = -1;
+            Console.WriteLine(description);
 
-        }
+            for (int i = 0; i < options.Length; i++)
+                Console.WriteLine((i+1) + ". " + options[i] );
+            Console.Write("> ");
 
-        private void StartingScene()
-        {
+            while (choice == -1)
+            {
+                if (int.TryParse(Console.ReadLine(), out choice))
+                {
+                    choice--;
+                    if (choice < 0 || choice >= options.Length)
+                    {
+                        choice = -1;
+                        Console.WriteLine("Invalde Input");
+                    }
+                }
+                else
+                {
+                    choice = -1;
+                    Console.WriteLine("Invalde Input");
+                }
+            }
+            return choice;
 
-        }
-
-        private void InitializePlayerAbilies()
-        {
-            Abilitie seaStarAtt = new Abilitie { Name = "Sea-Star-Shuriken", OutPutDamage = 15f };
-            Abilitie eelAtt = new Abilitie { Name = "Electric Eel Whip", OutPutDamage = 20f };
-            Abilitie pufferAtt = new Abilitie { Name = "Puffer-Fish-Grenade", OutPutDamage = 25f };
-
-            _playerAbilities = new Abilitie[] { seaStarAtt, eelAtt, pufferAtt };
-
-            _player = new Entity("Takoyaki", 1000, 15, _playerAbilities);
-
-        }
-
-        private void InitializeEnemiessAbilities()
-        {
-
-            
-
-            Entity SeaHorseTroop = new Entity("Sea-Horse-Trooper", 100,10,)
-                
-                _currentMinion = _minions[0];
         }
     }
-
 }
