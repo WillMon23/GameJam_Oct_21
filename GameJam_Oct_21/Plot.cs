@@ -304,14 +304,20 @@ namespace GameJam_Oct_21
                     }
                     break;
                 case 3:
+
                     if (_player.HealingPotion > 0)
-                        if (_player.Healing(75) > 0)
+                    {
+                        float healGained = _player.Healing(75);
+                        if (!(_player.HealthCap > _player.Health))
                         {
                             _player.HealingPotion--;
-                            Console.WriteLine("You Healed For " + 75 + "health");
+                            Console.WriteLine("You Healed For " + healGained + " health");
                         }
                         else
                             Console.WriteLine("You're at full health");
+                    }
+                    else
+                        Console.WriteLine("Out of potions");
                     break;
 
                 case 4:
@@ -470,14 +476,14 @@ namespace GameJam_Oct_21
                     }
                     break;
                 case 3:
-                    if (_player.HealingPotion >= 0)
-                        if (_player.Healing(75) > _player.HealthCap - _player.Health)
-                        {
-                            _player.HealingPotion--;
-                            Console.WriteLine("You Healed For " + 75 + "health");
-                        }
-                        else
-                            Console.WriteLine("You're at full health");
+                    if (_player.HealingPotion > 0)
+                    {
+                        Console.WriteLine("You Healed For " + _player.Healing(75) + "health");
+                             _player.HealingPotion--;
+                    }
+
+                    else
+                        Console.WriteLine("You're out of ");
                     break;
 
                 case 4:
@@ -584,13 +590,24 @@ namespace GameJam_Oct_21
                 "Defense: " + (int)entity.Defense);
         }
 
+        private void PrintStats(Player player)
+        {
+            Console.WriteLine("Name: " + player.Name + "\n" +
+                "Health: " + (int)player.Health + "\n" +
+                "Defense: " + (int)player.Defense + "\n" +
+                "Healing Scalap: " + player.HealingPotion);
+
+        }
+
+
+
         private string[] GetNameOptions(params string[] names)
         {
             string[] options = new string[names.Length + 2];
 
             for (int i = 0; i < names.Length; i++)
                 options[i] = names[i];
-            options[names.Length] = "("+_player.HealingPotion + ") Healing Scalap in stash";
+            options[names.Length] = "Use Healing Scalap";
             options[names.Length + 1] = "Quit";
             return options;
         }
