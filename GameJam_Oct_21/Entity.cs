@@ -37,7 +37,7 @@ namespace GameJam_Oct_21
 
         public Entity(string name, float health, float defense, Abilitie[] abilities, bool alive = false)
         {
-            _name = name + "Leader" ;
+            _name = name;
             _health = health;
             _healthCap = health; 
             _defense = defense;
@@ -69,7 +69,7 @@ namespace GameJam_Oct_21
         {
             string[] weaponNames = new string[_abilities.Length]; 
             for(int i = 0; i < _abilities.Length; i++)
-                weaponNames[i] = _abilities[i].Name;
+                weaponNames[i] = _abilities[i].Name +  " - Deals: " + _abilities[i].OutPutDamage + " Attack Damage";
 
             return weaponNames;
         }
@@ -78,7 +78,10 @@ namespace GameJam_Oct_21
         {
 
             if ((_health + healthGain) >= HealthCap)
-                return 0;
+            {
+                _health += (healthGain - HealthCap);
+                return (healthGain - HealthCap);
+            }
             else
                 _health += healthGain;
 

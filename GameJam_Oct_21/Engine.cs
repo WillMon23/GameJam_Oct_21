@@ -8,7 +8,7 @@ namespace GameJam_Oct_21
     {
         private static bool _applicationShouldExit;
         // Checks if the game has ended yet 
-        private bool gameOver = false;
+        public static bool gameOver = false;
         // Creats an instance of a board 
         private Plot _gameBoard;
 

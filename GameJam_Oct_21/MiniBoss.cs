@@ -27,7 +27,7 @@ namespace GameJam_Oct_21
         {
             Entity[] minionHord = new Entity[_totalMinons];
             for (int i = 0; i < minionHord.Length; i++)
-                minionHord[i] = new Entity(Name + "Minion" + (i + 1), (Health / 3), (Defense * 0), Abilities);
+                minionHord[i] = new Entity(Name + " Minion Rank #" + (i + 1), (Health / 3), (Defense * 0), Abilities);
 
             return minionHord;
         }
