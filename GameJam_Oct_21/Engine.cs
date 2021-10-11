@@ -21,9 +21,13 @@ namespace GameJam_Oct_21
 
             while (!gameOver)
             {
-                
+                // Drew: Usually better to update before you draw, 
+                //  that way you're always drawing the most updated form of the game
                 Draw();
                 Update();
+                // Drew: Extra console clear here, 
+                //  not causing any issues atm but you're clearing twice per frame
+                //  since you're also clearing in Draw()
                 Console.Clear();
             }
 
@@ -39,6 +43,7 @@ namespace GameJam_Oct_21
             _gameBoard.Start();
         }
 
+        // Drew: Draw, Update, and End are super minimal as they should be. Lookin' good.
         private void Draw()
         {
             Console.Clear();

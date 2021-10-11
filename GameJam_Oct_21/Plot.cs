@@ -7,6 +7,7 @@ namespace GameJam_Oct_21
     
     class Plot
     {
+        // Drew: When they use enums. https://tenor.com/Opi0.gif
         public enum Scene
         {
             STARTMENU,
@@ -106,7 +107,7 @@ namespace GameJam_Oct_21
         {
             
                 Console.Write("Back in 1990, there was a SSS+ Tier assassin, named . . . \nEnter Your players name \n> ");
-            
+            // Drew: Found where the readline needed to be :P
             Console.WriteLine("Until one faithful night, " + _player.Name + " arrived to home base from a resent mission. To find all of there fellow assassin brethren slaughtered.");
             Console.ReadKey();
             Console.WriteLine("This angered the skilled assassins and drove them into a furious rage that no man can control not even " + _player.Name);
