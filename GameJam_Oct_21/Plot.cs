@@ -236,7 +236,7 @@ namespace GameJam_Oct_21
             {
 
                 case 0:
-                    Console.WriteLine(_player.Name + "Tried to use" + _player.Abilities[choice].Name);
+                    Console.WriteLine(_player.Name + " Tried to use" + _player.ReadName()[choice]);
                     if (rng.Next(1, 10) <= (int)_player.Abilities[choice].HitChance)
                     {
                         Console.WriteLine(_currentMinion.Name + " Took " + _currentMinion.DamageTaken(_player.Abilities[choice]));
@@ -260,7 +260,7 @@ namespace GameJam_Oct_21
                     break;
 
                 case 1:
-                    Console.WriteLine(_player.Name + "Tried to use" + GetNameOptions(_player.ReadName()[choice]));
+                    Console.WriteLine(_player.Name + " Tried to use" + _player.ReadName()[choice]);
                     if (rng.Next(1, 10) <= (int)_player.Abilities[choice].HitChance)
                     { 
                         Console.WriteLine(_currentMinion.Name + " Took " + _currentMinion.DamageTaken(_player.Abilities[choice])); 
@@ -284,7 +284,7 @@ namespace GameJam_Oct_21
                     break;
 
                 case 2:
-                    Console.WriteLine(_player.Name + "Tried to use" + _player.Abilities[choice].Name);
+                    Console.WriteLine(_player.Name + " Tried to use" + _player.ReadName()[choice]);
                     if (rng.Next(1, 10) <= (int)_player.Abilities[choice].HitChance)
                         Console.WriteLine(_currentMinion.Name + " Took " + _currentMinion.DamageTaken(_player.Abilities[choice]));
                     else
@@ -335,7 +335,7 @@ namespace GameJam_Oct_21
                 _player.Alive = true;
                 _currentScene = Scene.TRYAGINMENU;
             }
-            if (_currentMinion.Health <= 0)
+            if (_currentMinion.Health < 0)
             {
                 Console.WriteLine(_currentMinion.Name + " has died");
                 Console.ReadKey();
