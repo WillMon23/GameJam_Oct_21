@@ -45,6 +45,13 @@ namespace GameJam_Oct_21
             _alive = alive;
         }
 
+
+        // Drew: For functions that do one specific thing, I often find it helpful to
+        //  name them simply what they do as a verb.
+        //  Like rather than use DamageTaken(), I'd call it TakeDamage() since that tells me
+        //  more clearly what this function is doing. DamageTaken() makes it sound like this function
+        //  tells me how much damage I've taken over the course of the fight.
+
         /// <summary>
         /// Calculates the damage out puting from the entities through the defense 
         /// to the health 
